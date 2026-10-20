@@ -154,4 +154,4 @@ src/lib/*/service.ts     catalogue, conversations, auth helpers
 - Chat uses polling, not push.
 - The demo wallet is funded from an explicitly negative demo source account; it
   is not a real financial ledger.
-- Seed vendors and dishes are fictional.
+- Seed vendors and dishes are fictional..
