@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" role="img" aria-label="Rice and grilled chicken">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#ffe9d4"/>
+      <stop offset="1" stop-color="#ffc99c"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="240" rx="24" fill="url(#bg)"/>
+  <circle cx="58" cy="46" r="7" fill="#fff" opacity=".45"/>
+  <circle cx="266" cy="62" r="4" fill="#fff" opacity=".5"/>
+  <circle cx="280" cy="176" r="8" fill="#fff" opacity=".28"/>
+  <ellipse cx="160" cy="196" rx="108" ry="16" fill="#a95b25" opacity=".16"/>
+  <path d="M66 128h188c0 48-42 76-94 76s-94-28-94-76Z" fill="#fdf7ec" stroke="#e4d1b7" stroke-width="4"/>
+  <ellipse cx="160" cy="128" rx="94" ry="25" fill="#fffdf8"/>
+  <g fill="#f6e2a8">
+    <ellipse cx="120" cy="118" rx="12" ry="5" transform="rotate(-12 120 118)"/>
+    <ellipse cx="146" cy="124" rx="12" ry="5" transform="rotate(8 146 124)"/>
+    <ellipse cx="174" cy="116" rx="12" ry="5" transform="rotate(-5 174 116)"/>
+    <ellipse cx="198" cy="124" rx="11" ry="5" transform="rotate(12 198 124)"/>
+    <ellipse cx="132" cy="134" rx="10" ry="4" transform="rotate(5 132 134)"/>
+    <ellipse cx="186" cy="134" rx="10" ry="4" transform="rotate(-8 186 134)"/>
+  </g>
+  <g>
+    <path d="M186 96c22-13 45 2 43 24-2 18-16 30-32 33-10 2-19-4-22-13-4-12 1-35 11-44Z" fill="#b4561f"/>
+    <path d="M194 104c12-7 25 0 24 13-1 11-10 19-20 21-6 1-11-3-13-9-2-8 2-20 9-25Z" fill="#d27532"/>
+    <path d="M188 148c-2 10-8 15-14 17" stroke="#f4e6d2" stroke-width="9" stroke-linecap="round"/>
+    <circle cx="172" cy="166" r="6" fill="#f4e6d2"/>
+  </g>
+  <g fill="#4f8a43">
+    <ellipse cx="96" cy="132" rx="12" ry="6" transform="rotate(18 96 132)"/>
+    <ellipse cx="112" cy="126" rx="10" ry="5" transform="rotate(-18 112 126)"/>
+  </g>
+</svg>
