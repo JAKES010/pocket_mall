@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" role="img" aria-label="Fresh salad">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#eef7e8"/>
+      <stop offset="1" stop-color="#cfe8c4"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="240" rx="24" fill="url(#bg)"/>
+  <circle cx="64" cy="52" r="7" fill="#fff" opacity=".5"/>
+  <circle cx="268" cy="60" r="5" fill="#fff" opacity=".5"/>
+  <ellipse cx="160" cy="198" rx="98" ry="15" fill="#3f6d35" opacity=".14"/>
+  <path d="M70 126h180c0 46-40 72-90 72s-90-26-90-72Z" fill="#fdf8ee" stroke="#dfe6d2" stroke-width="4"/>
+  <ellipse cx="160" cy="126" rx="90" ry="24" fill="#f4fbf0"/>
+  <g fill="#5fa04e">
+    <ellipse cx="112" cy="118" rx="24" ry="14" transform="rotate(-18 112 118)"/>
+    <ellipse cx="152" cy="110" rx="22" ry="13" transform="rotate(12 152 110)"/>
+    <ellipse cx="192" cy="116" rx="24" ry="14" transform="rotate(-8 192 116)"/>
+    <ellipse cx="136" cy="130" rx="18" ry="11" transform="rotate(20 136 130)"/>
+  </g>
+  <g fill="#3f7f35">
+    <ellipse cx="116" cy="114" rx="14" ry="8" transform="rotate(-24 116 114)"/>
+    <ellipse cx="188" cy="112" rx="15" ry="8" transform="rotate(16 188 112)"/>
+  </g>
+  <g fill="#ef7d3a">
+    <circle cx="146" cy="126" r="8"/>
+    <circle cx="172" cy="120" r="7"/>
+    <circle cx="204" cy="128" r="6"/>
+  </g>
+  <g fill="#f7d95c">
+    <circle cx="128" cy="134" r="6"/>
+    <circle cx="160" cy="132" r="5"/>
+  </g>
+</svg>

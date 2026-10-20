@@ -1,0 +1,26 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" role="img" aria-label="Grilled chicken">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff0dc"/>
+      <stop offset="1" stop-color="#ffbe8a"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="240" rx="24" fill="url(#bg)"/>
+  <circle cx="70" cy="58" r="6" fill="#fff" opacity=".45"/>
+  <circle cx="252" cy="44" r="9" fill="#fff" opacity=".3"/>
+  <ellipse cx="160" cy="200" rx="98" ry="15" fill="#a95922" opacity=".16"/>
+  <path d="M96 176c-22-30-20-70 2-92 24-24 66-20 86 4 20 24 18 58-4 78-22 20-62 32-84 10Z" fill="#b65a22"/>
+  <path d="M110 160c-15-22-13-50 3-65 17-17 47-14 62 4 14 17 12 41-3 55-15 15-46 22-62 6Z" fill="#cf7434"/>
+  <g stroke="#8d3f14" stroke-width="4" stroke-linecap="round" opacity=".75">
+    <path d="M118 112c10 6 20 6 30 0"/>
+    <path d="M112 132c15 8 34 8 49 0"/>
+    <path d="M120 152c11 6 24 6 35 0"/>
+  </g>
+  <path d="M186 90c10-6 20-4 26 4" stroke="#f8ead6" stroke-width="8" stroke-linecap="round"/>
+  <circle cx="216" cy="98" r="7" fill="#f8ead6"/>
+  <circle cx="230" cy="92" r="7" fill="#f8ead6"/>
+  <g fill="#4f8a43">
+    <ellipse cx="82" cy="150" rx="13" ry="6" transform="rotate(-24 82 150)"/>
+    <ellipse cx="96" cy="168" rx="11" ry="5" transform="rotate(14 96 168)"/>
+  </g>
+</svg>

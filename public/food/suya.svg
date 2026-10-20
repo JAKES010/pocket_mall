@@ -1,0 +1,40 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" role="img" aria-label="Suya skewers">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff0dc"/>
+      <stop offset="1" stop-color="#f8b98a"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="240" rx="24" fill="url(#bg)"/>
+  <circle cx="66" cy="48" r="7" fill="#fff" opacity=".45"/>
+  <circle cx="258" cy="54" r="4" fill="#fff" opacity=".6"/>
+  <ellipse cx="160" cy="198" rx="102" ry="15" fill="#a95225" opacity=".18"/>
+  <g transform="rotate(-14 160 130)">
+    <rect x="52" y="124" width="216" height="7" rx="3.5" fill="#c9a06b"/>
+    <g>
+      <rect x="72" y="100" width="34" height="34" rx="8" fill="#a4481c"/>
+      <rect x="116" y="100" width="34" height="34" rx="8" fill="#bd5a24"/>
+      <rect x="160" y="100" width="34" height="34" rx="8" fill="#a4481c"/>
+      <rect x="204" y="100" width="34" height="34" rx="8" fill="#bd5a24"/>
+    </g>
+    <g fill="#e8a05e" opacity=".7">
+      <circle cx="84" cy="112" r="4"/><circle cx="128" cy="120" r="4"/><circle cx="172" cy="110" r="4"/><circle cx="216" cy="118" r="4"/>
+    </g>
+    <g fill="#f2c94c">
+      <circle cx="100" cy="124" r="2.5"/><circle cx="146" cy="108" r="2.5"/><circle cx="190" cy="126" r="2.5"/><circle cx="236" cy="110" r="2.5"/>
+    </g>
+  </g>
+  <g transform="rotate(10 160 140)">
+    <rect x="68" y="164" width="184" height="6" rx="3" fill="#c9a06b"/>
+    <g>
+      <rect x="88" y="146" width="28" height="28" rx="7" fill="#b2521f"/>
+      <rect x="126" y="146" width="28" height="28" rx="7" fill="#963f18"/>
+      <rect x="164" y="146" width="28" height="28" rx="7" fill="#b2521f"/>
+    </g>
+  </g>
+  <g fill="#4f8a43">
+    <ellipse cx="232" cy="164" rx="14" ry="6" transform="rotate(-20 232 164)"/>
+    <ellipse cx="248" cy="178" rx="11" ry="5" transform="rotate(14 248 178)"/>
+  </g>
+  <circle cx="238" cy="150" r="6" fill="#ef7d3a"/>
+</svg>

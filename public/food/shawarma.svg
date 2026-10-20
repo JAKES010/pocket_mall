@@ -1,0 +1,31 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" role="img" aria-label="Chicken shawarma wrap">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fff1e2"/>
+      <stop offset="1" stop-color="#ffcfae"/>
+    </linearGradient>
+  </defs>
+  <rect width="320" height="240" rx="24" fill="url(#bg)"/>
+  <circle cx="62" cy="50" r="7" fill="#fff" opacity=".45"/>
+  <circle cx="262" cy="58" r="4" fill="#fff" opacity=".55"/>
+  <ellipse cx="160" cy="200" rx="102" ry="15" fill="#a95b25" opacity=".16"/>
+  <g transform="rotate(-8 160 132)">
+    <path d="M74 112c20-24 50-34 82-30 32 4 58 22 70 46-12 24-38 42-70 46-32 4-62-6-82-30-4-10-4-22 0-32Z" fill="#f0d3a2"/>
+    <path d="M86 118c18-18 42-26 68-23 27 3 48 18 59 37-11 19-32 34-59 37-26 3-50-5-68-23-4-8-4-20 0-28Z" fill="#f7e3bd"/>
+    <path d="M92 120h134" stroke="#e2b97c" stroke-width="4" stroke-linecap="round"/>
+    <g fill="#5f9c46">
+      <ellipse cx="122" cy="126" rx="14" ry="6" transform="rotate(-6 122 126)"/>
+      <ellipse cx="150" cy="120" rx="12" ry="5" transform="rotate(8 150 120)"/>
+      <ellipse cx="176" cy="128" rx="13" ry="6" transform="rotate(-10 176 128)"/>
+    </g>
+    <g fill="#b4561f">
+      <ellipse cx="136" cy="136" rx="12" ry="7" transform="rotate(6 136 136)"/>
+      <ellipse cx="164" cy="140" rx="12" ry="7" transform="rotate(-8 164 140)"/>
+      <ellipse cx="192" cy="134" rx="11" ry="6" transform="rotate(10 192 134)"/>
+    </g>
+    <g fill="#ef7d3a">
+      <circle cx="126" cy="144" r="4"/><circle cx="152" cy="148" r="3.5"/><circle cx="184" cy="146" r="3.5"/>
+    </g>
+  </g>
+  <path d="M226 168c10-4 18 0 20 8" stroke="#f0d3a2" stroke-width="10" stroke-linecap="round"/>
+</svg>
