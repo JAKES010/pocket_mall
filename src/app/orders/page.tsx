@@ -16,10 +16,9 @@ export default async function OrdersPage() {
   const vendor = getVendorForOwner(user.id);
 
   return (
-    <div>
-      <PageHeading eyebrow="Your orders" title="Orders">
-        Follow each order from submission to completion. Demo payments are held
-        until the order is done, then refunded or settled automatically.
+    <div className="orders-page">
+      <PageHeading eyebrow="YOUR TABLE, YOUR UPDATES" title="Your orders">
+        Follow each order from the kitchen to your door. This preview uses simulated wallet payments.
       </PageHeading>
 
       {vendor && (
@@ -52,11 +51,11 @@ export default async function OrdersPage() {
               <Link
                 key={order.id}
                 href={`/orders/${order.id}`}
-                className="card block p-4 transition hover:border-brand-300 sm:p-5"
+              className="customer-order-card block p-4 sm:p-5"
               >
                 <div className="flex flex-wrap items-start justify-between gap-3">
                   <div className="flex items-center gap-3">
-                    <span className="grid size-11 shrink-0 place-items-center rounded-2xl bg-brand-100 text-xl">
+                    <span className="customer-order-emoji grid size-11 shrink-0 place-items-center rounded-2xl bg-brand-100 text-xl">
                       {order.vendor_emoji}
                     </span>
                     <div>
@@ -73,7 +72,7 @@ export default async function OrdersPage() {
                     <PaymentBadge status={order.payment_status} />
                   </div>
                 </div>
-                <div className="mt-3 flex flex-wrap items-end justify-between gap-2 border-t border-line pt-3">
+                <div className="customer-order-bottom mt-3 flex flex-wrap items-end justify-between gap-2 border-t border-line pt-3">
                   <p className="text-xs text-muted">{meta.hint}</p>
                   <p className="text-lg font-bold">{formatNaira(order.total_kobo)}</p>
                 </div>

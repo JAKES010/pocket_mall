@@ -42,7 +42,7 @@ export default async function OrderDetailPage({
   const lastStepLabel = order.fulfilment === "delivery" ? "Delivered" : "Completed";
 
   return (
-    <div className="space-y-5">
+    <div className="order-detail-page space-y-6">
       <div className="flex flex-wrap items-center justify-between gap-2">
         <Link
           href={isVendor ? "/sell" : "/orders"}
@@ -55,7 +55,7 @@ export default async function OrderDetailPage({
         </span>
       </div>
 
-      <section className="card p-5 sm:p-6">
+      <section className="order-summary-card card p-5 sm:p-6">
         <div className="flex flex-wrap items-start justify-between gap-4">
           <div className="flex items-center gap-3">
             <span className="grid size-12 place-items-center rounded-2xl bg-brand-100 text-2xl">
@@ -124,11 +124,11 @@ export default async function OrderDetailPage({
       )}
 
       {!terminal && (
-        <section className="card p-5 sm:p-6">
+        <section className="order-progress-card card p-5 sm:p-6">
           <h2 className="text-sm font-bold uppercase tracking-wide text-muted">
             Progress
           </h2>
-          <ol className="mt-4 grid grid-cols-2 gap-3 sm:grid-cols-5">
+          <ol className="order-timeline mt-4 grid grid-cols-2 gap-3 sm:grid-cols-5">
             {CUSTOMER_TIMELINE.map((step, index) => {
               const done = index <= activeStep;
               const current = index === activeStep;
@@ -170,7 +170,7 @@ export default async function OrderDetailPage({
       )}
 
       <div className="grid gap-5 lg:grid-cols-[1.3fr_1fr]">
-        <section className="card p-5 sm:p-6">
+        <section className="order-receipt card p-5 sm:p-6">
           <h2 className="text-lg font-semibold">Receipt</h2>
           <ul className="mt-3 divide-y divide-line">
             {items.map((item) => (
