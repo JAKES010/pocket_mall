@@ -92,8 +92,9 @@ export function AuthForm({
   }
 
   return (
-    <div className="mx-auto grid max-w-4xl gap-6 py-6 lg:grid-cols-[1fr_1fr]">
-      <div className="card p-6 sm:p-8">
+    <div className="auth-layout mx-auto grid max-w-5xl gap-5 py-6 sm:py-10 lg:grid-cols-[1fr_.92fr]">
+      <div className="auth-panel p-6 sm:p-9">
+        <span className="auth-mark">ORDERDESK <i>·</i> OTUKPO</span>
         <h1 className="text-3xl font-semibold">
           {mode === "sign-in" ? "Welcome back" : "Create your account"}
         </h1>
@@ -208,7 +209,7 @@ export function AuthForm({
         </p>
       </div>
 
-      <aside className="card bg-gradient-to-br from-brand-50 to-paper p-6 sm:p-8">
+      <aside className="auth-demo-panel p-6 sm:p-9">
         <span className="badge bg-brand-600 text-white">Demo access</span>
         <h2 className="mt-3 text-xl font-semibold">Jump straight in</h2>
         <p className="mt-1 text-sm leading-relaxed text-muted">

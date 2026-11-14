@@ -89,10 +89,10 @@ export function WalletClient({
   }
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[1fr_1.2fr]">
+    <div className="wallet-layout grid gap-6 lg:grid-cols-[.85fr_1.15fr]">
       <div className="space-y-4">
-        <div className="card overflow-hidden">
-          <div className="bg-gradient-to-br from-brand-600 to-brand-700 p-6 text-white">
+        <div className="wallet-card overflow-hidden">
+          <div className="wallet-balance p-6 text-white">
             <div className="flex items-center justify-between">
               <p className="text-[11px] font-bold uppercase tracking-[0.18em] text-white/75">
                 Demo wallet · NGN
@@ -177,7 +177,7 @@ export function WalletClient({
         </div>
       </div>
 
-      <div className="card overflow-hidden">
+      <div className="wallet-activity overflow-hidden">
         <div className="flex items-center justify-between border-b border-line px-5 py-4">
           <h2 className="text-lg font-semibold">Wallet activity</h2>
           <span className="badge bg-paper text-muted ring-1 ring-line">
@@ -195,7 +195,7 @@ export function WalletClient({
               return (
                 <li
                   key={entry.entry_id}
-                  className="flex items-center gap-3 px-5 py-3.5"
+                  className="wallet-activity-row flex items-center gap-3 px-5 py-3.5"
                 >
                   <span
                     className={`grid size-9 shrink-0 place-items-center rounded-full text-sm ${
