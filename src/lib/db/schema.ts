@@ -32,6 +32,8 @@ CREATE TABLE IF NOT EXISTS vendors (
   opening_hours TEXT NOT NULL DEFAULT '',
   accepting_orders INTEGER NOT NULL DEFAULT 1,
   published_at TEXT,
+  verified_at TEXT,
+  verification_source TEXT,
   emoji TEXT NOT NULL DEFAULT '🍲',
   image_url TEXT,
   is_sample INTEGER NOT NULL DEFAULT 0,

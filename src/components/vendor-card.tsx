@@ -41,6 +41,9 @@ export function VendorCard({ vendor, index = 0 }: { vendor: VendorCardType; inde
           {vendor.is_sample === 1 && (
             <span className="badge bg-white/90 text-stone-600">Preview kitchen</span>
           )}
+          {vendor.verified_at && (
+            <span className="badge bg-[#e4f4ca] text-[#305a31]">Verified kitchen</span>
+          )}
         </div>
       </div>
       <div className="flex flex-1 flex-col p-5">

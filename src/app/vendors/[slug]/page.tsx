@@ -44,6 +44,7 @@ export default async function VendorPage({
                 {accepting ? "Taking orders" : "Temporarily paused"}
               </span>
               {vendor.is_sample === 1 && <span className="badge bg-white/90 text-stone-600">Preview listing</span>}
+              {vendor.verified_at && <span className="badge bg-[#e4f4ca] text-[#305a31]">Verified kitchen</span>}
             </div>
             <h1 className="mt-3 text-3xl font-semibold leading-tight text-white sm:text-5xl">{vendor.name}</h1>
             <p className="mt-2 text-xs text-white/85 sm:text-sm">{vendor.address}<span className="px-2 text-white/50">·</span>{vendor.opening_hours}</p>

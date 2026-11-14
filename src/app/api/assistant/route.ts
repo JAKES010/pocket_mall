@@ -45,6 +45,13 @@ export async function POST(request: Request) {
     if (!vendor) {
       throw new ApiError(404, "VENDOR_NOT_FOUND", "That storefront could not be found.");
     }
+    if (!vendor.verified_at) {
+      throw new ApiError(
+        409,
+        "VENDOR_NOT_VERIFIED",
+        "OrderDesk AI can recommend meals only from verified kitchens. This preview listing is not verified.",
+      );
+    }
 
     const suggestion = await vendorOrderAssistant(
       input.message,

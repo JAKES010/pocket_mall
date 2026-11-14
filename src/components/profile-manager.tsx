@@ -121,6 +121,7 @@ export function ProfileManager({
   const [zoneError, setZoneError] = useState<string | null>(null);
 
   const published = Boolean(vendor.published_at);
+  const verified = Boolean(vendor.verified_at);
   const activeZones = zones.filter((zone) => zone.active === 1);
 
   async function saveDetails(event: React.FormEvent) {
@@ -178,7 +179,7 @@ export function ProfileManager({
         setError(data?.error?.message ?? "Publish state could not be changed.");
         return;
       }
-      setNotice(next ? "Your storefront is live." : "Your storefront is offline.");
+      setNotice(next ? "Submitted for review. The listing stays hidden until an operator records verification." : "Your storefront is offline.");
       router.refresh();
     } catch {
       setError("Network error. Publish state unchanged.");
@@ -224,20 +225,22 @@ export function ProfileManager({
           <div>
             <h2 className="text-lg font-semibold">Visibility</h2>
             <p className="text-xs text-muted">
-              {published
-                ? "Your storefront is listed in the marketplace."
-                : "Your storefront is hidden from customers."}
+              {published && verified
+                ? "Your verified storefront is listed in the marketplace."
+                : published
+                  ? "Submitted for review. The listing stays hidden until verification is recorded."
+                  : "Your storefront is hidden from customers."}
             </p>
           </div>
           <div className="flex items-center gap-2">
             <span
               className={`badge ${
-                published
+                published && verified
                   ? "bg-leaf-50 text-leaf-700"
                   : "bg-amber-100 text-amber-800"
               }`}
             >
-              {published ? "Published" : "Unpublished"}
+              {published && verified ? "Verified & public" : published ? "Review pending" : "Unpublished"}
             </span>
             <button
               type="button"

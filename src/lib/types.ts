@@ -39,6 +39,8 @@ export interface Vendor {
   opening_hours: string;
   accepting_orders: number;
   published_at: string | null;
+  verified_at: string | null;
+  verification_source: string | null;
   emoji: string;
   image_url: string | null;
   is_sample: number;

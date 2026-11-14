@@ -19,7 +19,10 @@ export function listPublishedVendors(options?: {
   const acceptingOnly = options?.acceptingOnly ?? false;
   const like = `%${q}%`;
 
-  const conditions = ["v.published_at IS NOT NULL"];
+  const conditions = [
+    "v.published_at IS NOT NULL",
+    "(v.verified_at IS NOT NULL OR v.is_sample = 1)",
+  ];
   const params: (string | number)[] = [];
 
   if (q) {
@@ -52,7 +55,7 @@ export function listPublishedVendors(options?: {
 
 export function getPublicVendorBySlug(slug: string): VendorPublic | null {
   const vendor = get<Vendor>(
-    "SELECT * FROM vendors WHERE slug = ? AND published_at IS NOT NULL",
+    "SELECT * FROM vendors WHERE slug = ? AND published_at IS NOT NULL AND (verified_at IS NOT NULL OR is_sample = 1)",
     slug,
   );
   if (!vendor) return null;
@@ -61,7 +64,7 @@ export function getPublicVendorBySlug(slug: string): VendorPublic | null {
 
 export function getPublicVendorById(id: string): VendorPublic | null {
   const vendor = get<Vendor>(
-    "SELECT * FROM vendors WHERE id = ? AND published_at IS NOT NULL",
+    "SELECT * FROM vendors WHERE id = ? AND published_at IS NOT NULL AND (verified_at IS NOT NULL OR is_sample = 1)",
     id,
   );
   if (!vendor) return null;

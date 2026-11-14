@@ -13,13 +13,11 @@ export default async function VendorOnboardingPage() {
 
   return (
     <div className="onboarding-page">
-      <Link href="/" className="btn-ghost btn-sm -ml-2 mb-2">
-        ← Back to marketplace
-      </Link>
-      <PageHeading eyebrow="Sell on OrderDesk" title="Open your storefront">
-        Set up your kitchen, delivery zones and first dish in one pass. You can
-        edit everything later. This is a prototype — storefronts and payouts are
-        simulated.
+      <Link href="/" className="btn-ghost btn-sm -ml-2 mb-2">← Back to marketplace</Link>
+      <PageHeading eyebrow="SELL ON ORDERDESK" title="Set up your kitchen">
+        Add your business details, delivery zones and first dish. New kitchens
+        stay hidden until an operator verifies their listing. This preview uses
+        sample orders and simulated wallet funds.
       </PageHeading>
       <OnboardingClient />
     </div>

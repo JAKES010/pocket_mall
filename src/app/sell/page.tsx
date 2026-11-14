@@ -32,6 +32,7 @@ export default async function VendorDeskPage() {
   const history = orders.filter((order) => !(LIVE_STATUSES as readonly string[]).includes(order.status)).slice(0, 8);
   const needsAction = live.filter((order) => order.status === "submitted").length;
   const published = Boolean(vendor.published_at);
+  const verified = Boolean(vendor.verified_at);
 
   return (
     <div className="vendor-desk space-y-9 sm:space-y-12">
@@ -44,9 +45,9 @@ export default async function VendorDeskPage() {
               <p className="desk-eyebrow">YOUR KITCHEN · VENDOR DESK</p>
               <h1 className="mt-2 text-3xl font-semibold text-white sm:text-4xl">{vendor.name}</h1>
               <div className="mt-2 flex flex-wrap items-center gap-x-3 gap-y-1 text-xs text-white/65">
-                <span className="inline-flex items-center gap-1.5"><i className={`desk-status-dot ${published ? "is-live" : ""}`} />{published ? "Storefront published" : "Storefront unpublished"}</span>
+                <span className="inline-flex items-center gap-1.5"><i className={`desk-status-dot ${published && verified ? "is-live" : ""}`} />{published && verified ? "Verified & public" : published ? "Submitted · verification pending" : "Storefront unpublished"}</span>
                 <span className="hidden text-white/30 sm:inline">/</span>
-                {published ? <Link href={`/vendors/${vendor.slug}`} className="font-semibold text-[#d5f080] hover:underline">View public storefront ↗</Link> : <span>Customers cannot see you yet.</span>}
+                {published && verified ? <Link href={`/vendors/${vendor.slug}`} className="font-semibold text-[#d5f080] hover:underline">View public storefront ↗</Link> : <span>{published ? "Hidden until a review is completed." : "Customers cannot see you yet."}</span>}
               </div>
             </div>
           </div>
@@ -58,7 +59,8 @@ export default async function VendorDeskPage() {
             </div>
           </div>
         </div>
-        {!published && <div className="relative z-10 mx-6 mb-6 rounded-xl border border-[#f0d99d55] bg-[#f5dfa91c] px-4 py-3 text-xs leading-relaxed text-[#fff0c9] sm:mx-8 lg:mx-10"><strong>Almost ready to open.</strong> Add an available menu item, then publish your storefront from <Link href="/sell/profile" className="font-bold underline">storefront settings</Link>.</div>}
+        {!published && <div className="relative z-10 mx-6 mb-6 rounded-xl border border-[#f0d99d55] bg-[#f5dfa91c] px-4 py-3 text-xs leading-relaxed text-[#fff0c9] sm:mx-8 lg:mx-10"><strong>Almost ready to submit.</strong> Add an available menu item, then publish your listing from <Link href="/sell/profile" className="font-bold underline">storefront settings</Link>. It stays hidden from customers until verification is recorded.</div>}
+        {published && !verified && <div className="relative z-10 mx-6 mb-6 rounded-xl border border-[#f0d99d55] bg-[#f5dfa91c] px-4 py-3 text-xs leading-relaxed text-[#fff0c9] sm:mx-8 lg:mx-10"><strong>Verification pending.</strong> This listing is hidden from customers and OrderDesk AI until an operator reviews its business details.</div>}
         <div className="desk-hero-footer"><span>ORDERDESK KITCHEN CONSOLE</span><span>{vendor.city.toUpperCase()} · LOCAL COMMERCE</span></div>
       </section>
 

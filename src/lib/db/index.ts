@@ -18,6 +18,15 @@ export function getDb(): DatabaseSync {
 
   const db = new DatabaseSync(file);
   db.exec(SCHEMA_SQL);
+  const vendorColumns = db.prepare("PRAGMA table_info(vendors)").all() as { name: string }[];
+  if (!vendorColumns.some((column) => column.name === "verified_at")) {
+    db.exec("ALTER TABLE vendors ADD COLUMN verified_at TEXT");
+  }
+  if (!vendorColumns.some((column) => column.name === "verification_source")) {
+    db.exec("ALTER TABLE vendors ADD COLUMN verification_source TEXT");
+  }
+  db.exec("CREATE INDEX IF NOT EXISTS idx_vendors_verified ON vendors(verified_at)");
+  db.exec("CREATE INDEX IF NOT EXISTS idx_vendors_verified ON vendors(verified_at)");
   seedDatabase(db);
   globalForDb.__orderdeskDb = db;
   return db;

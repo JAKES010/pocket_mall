@@ -127,7 +127,7 @@ export function OnboardingClient() {
         return;
       }
 
-      setPhase("Publishing your storefront…");
+      setPhase("Submitting your listing for review…");
       const publishResponse = await fetch(`/api/vendors/${vendorId}`, {
         method: "PATCH",
         headers: { "Content-Type": "application/json" },
@@ -443,10 +443,10 @@ export function OnboardingClient() {
 
       <div className="onboarding-submit flex flex-wrap items-center gap-3">
         <button type="submit" disabled={busy} className="btn-primary">
-          {busy ? (phase ?? "Creating…") : "Create & publish storefront"}
+          {busy ? (phase ?? "Creating…") : "Create & submit for review"}
         </button>
         <p className="text-[11px] text-muted">
-          Demo storefronts are fictional. No real payments or payouts occur.
+          Your listing stays hidden until verification is recorded. Preview accounts use sample data and simulated payments.
         </p>
       </div>
     </form>

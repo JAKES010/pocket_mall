@@ -164,7 +164,7 @@ interface CatalogueEntry {
 
 function loadDiscoveryCatalogue(): CatalogueEntry[] {
   const vendors = all<Vendor>(
-    "SELECT * FROM vendors WHERE published_at IS NOT NULL AND accepting_orders = 1 ORDER BY name ASC",
+    "SELECT * FROM vendors WHERE published_at IS NOT NULL AND verified_at IS NOT NULL AND accepting_orders = 1 ORDER BY name ASC",
   );
   return vendors.map((vendor) => ({
     vendor,
@@ -193,16 +193,31 @@ function scoreItem(item: MenuItem, keywords: string[]): number {
   return score;
 }
 
+function normalizeZone(value: string): string {
+  return value.toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+}
+
+function matchRequestedZoneName(message: string, catalogue: CatalogueEntry[]): string | null {
+  const request = normalizeZone(message);
+  const names = [...new Set(catalogue.flatMap((entry) => entry.zones.map((zone) => zone.name)))];
+  const matched = names
+    .filter((name) => normalizeZone(name).length >= 3 && request.includes(normalizeZone(name)))
+    .sort((a, b) => normalizeZone(b).length - normalizeZone(a).length);
+  return matched[0] ?? null;
+}
+
 interface Candidate {
   option: AssistantDiscoveryOption;
   score: number;
   withinBudget: boolean;
+  coversRequest: boolean;
 }
 
 function buildCandidates(
   entry: CatalogueEntry,
   constraints: DiscoveryConstraints,
   requestedZoneId: string | null,
+  requestedZone: string | null,
 ): Candidate[] {
   const { vendor, items, zones } = entry;
   if (items.length === 0) return [];
@@ -215,19 +230,21 @@ function buildCandidates(
 
   if (scored.length === 0) return [];
 
-  const zone =
-    zones.find((candidate) => candidate.id === requestedZoneId) ??
-    zones[0] ??
-    null;
+  const zone = requestedZoneId
+    ? zones.find((candidate) => candidate.id === requestedZoneId) ?? null
+    : requestedZone
+      ? zones.find((candidate) => normalizeZone(candidate.name) === normalizeZone(requestedZone)) ?? null
+      : zones[0] ?? null;
   const fulfilment = constraints.fulfilment;
-  if (fulfilment === "delivery" && !zone) return [];
+  if (fulfilment === "delivery" && (!zone || (requestedZone && !requestedZoneId && normalizeZone(zone.name) !== normalizeZone(requestedZone)))) return [];
   const deliveryFee =
     fulfilment === "delivery" && zone ? zone.fee_kobo : 0;
 
-  const carts: { items: { menu_item_id: string; quantity: number }[]; score: number }[] = [];
+  const carts: { items: { menu_item_id: string; quantity: number }[]; score: number; note?: string }[] = [];
   const pushCart = (
     lines: { menu_item_id: string; quantity: number }[],
     score: number,
+    note?: string,
   ) => {
     if (lines.length === 0) return;
     const signature = lines
@@ -235,7 +252,7 @@ function buildCandidates(
       .sort()
       .join("|");
     if (carts.some((cart) => cartSignature(cart.items) === signature)) return;
-    carts.push({ items: lines, score });
+    carts.push({ items: lines, score, note });
   };
   const cartSignature = (lines: { menu_item_id: string; quantity: number }[]) =>
     lines
@@ -287,8 +304,28 @@ function buildCandidates(
             { menu_item_id: right.item.id, quantity: target },
           ],
           left.score + right.score + 1,
+          "Requested menu pairing",
         );
       }
+    }
+  }
+
+  const beveragePattern = /\b(drink|beverage|zobo|malt|coke|water|juice|shake|soda)\b/i;
+  const requestNamesBeverage = constraints.keywords.some((keyword) => beveragePattern.test(keyword));
+  if (constraints.keywords.length > 0 && !requestNamesBeverage) {
+    const main = scored.find(({ item }) => !beveragePattern.test(`${item.name} ${item.tags}`));
+    const beverage = items
+      .filter((item) => beveragePattern.test(`${item.name} ${item.tags}`))
+      .sort((a, b) => a.price_kobo - b.price_kobo)[0];
+    if (main && beverage && main.item.id !== beverage.id) {
+      pushCart(
+        [
+          { menu_item_id: main.item.id, quantity: target },
+          { menu_item_id: beverage.id, quantity: 1 },
+        ],
+        main.score + 0.25,
+        `Menu pairing: ${beverage.name}`,
+      );
     }
   }
 
@@ -314,6 +351,12 @@ function buildCandidates(
       0,
     );
     const total = subtotal + deliveryFee;
+    const coversRequest = constraints.keywords.every((keyword) =>
+      resolved.some((line) => {
+        const item = items.find((menuItem) => menuItem.id === line.menu_item_id);
+        return item ? `${item.name} ${item.tags} ${item.description}`.toLowerCase().includes(keyword) : false;
+      }),
+    );
     const withinBudget =
       constraints.budget_kobo === null || total <= constraints.budget_kobo;
     candidates.push({
@@ -328,10 +371,11 @@ function buildCandidates(
         total_kobo: total,
         zone_id: fulfilment === "delivery" ? (zone?.id ?? null) : null,
         zone_name: fulfilment === "delivery" ? (zone?.name ?? null) : null,
-        note: undefined,
+        note: cart.note,
       },
       score: cart.score,
       withinBudget,
+      coversRequest,
     });
   }
 
@@ -352,13 +396,16 @@ function buildCandidates(
 function planDiscovery(
   constraints: DiscoveryConstraints,
   requestedZoneId: string | null,
+  requestMessage: string,
 ): AssistantSuggestion {
   const catalogue = loadDiscoveryCatalogue();
+  const zoneName = requestedZoneId ? null : matchRequestedZoneName(requestMessage, catalogue);
   const candidates = catalogue.flatMap((entry) =>
-    buildCandidates(entry, constraints, requestedZoneId),
+    buildCandidates(entry, constraints, requestedZoneId, zoneName),
   );
 
-  const withinBudget = candidates
+  const completeCandidates = candidates.filter((candidate) => candidate.coversRequest);
+  const withinBudget = completeCandidates
     .filter((candidate) => candidate.withinBudget)
     .sort(
       (a, b) =>
@@ -366,7 +413,7 @@ function planDiscovery(
         b.option.total_kobo - a.option.total_kobo,
     );
 
-  const overBudget = candidates
+  const overBudget = completeCandidates
     .filter((candidate) => !candidate.withinBudget)
     .sort((a, b) => a.option.total_kobo - b.option.total_kobo);
 
@@ -375,7 +422,7 @@ function planDiscovery(
 
   const clarifications: string[] = [];
   if (constraints.clarification) clarifications.push(constraints.clarification);
-  if (constraints.fulfilment === "delivery" && !requestedZoneId) {
+  if (constraints.fulfilment === "delivery" && !requestedZoneId && !zoneName) {
     clarifications.push(
       "Delivery is priced with each vendor's cheapest zone — confirm the exact zone at checkout.",
     );
@@ -383,10 +430,13 @@ function planDiscovery(
 
   let message: string;
   if (options.length === 0) {
-    message =
-      constraints.keywords.length > 0
-        ? `I couldn't match ${constraints.keywords.join(" and ")} to a currently available menu. Try another dish or browse the kitchens.`
-        : "Tell me what you are craving, or browse the kitchens and their current menus.";
+    message = catalogue.length === 0
+      ? "No verified kitchens are currently published and accepting orders. You can browse preview listings, but they are sample data and are not verified businesses."
+      : constraints.fulfilment === "delivery" && zoneName
+        ? `I couldn't match this request to an active menu with a configured ${zoneName} delivery zone. Check the kitchen's listed zones or choose pickup.`
+      : constraints.keywords.length > 0
+        ? `I couldn't match ${constraints.keywords.join(" and ")} to a currently available menu. Try another dish or browse the verified kitchens.`
+        : "Tell me what you are craving, or browse the verified kitchens and their current menus.";
   } else if (withinBudget.length === 0 && constraints.budget_kobo !== null) {
     const cheapest = options[0];
     const over = cheapest.total_kobo - constraints.budget_kobo;
@@ -443,6 +493,7 @@ Rules:
 - Use a warm, polished Nigerian English tone for any clarification. Keep local dish names and explicit pairings in the extracted keywords.
 - Never imply that a kitchen is verified; the catalogue only confirms that its listing is published and accepting orders.
 - Never infer delivery coverage from a neighborhood name. Only configured zones and fees can be quoted by the application.
+- Only the supplied verified, published, currently accepting kitchens are eligible for recommendations.
 - Return only what the customer actually said. Do not invent quantities, budgets or locations.
 - "for two people" means people = 2.
 - "under ₦6,000 including delivery" means budget_kobo = 600000 and fulfilment = "delivery".
@@ -455,6 +506,7 @@ Rules:
 - Use concise, culturally resonant Nigerian English. Avoid slang overload.
 - Use only menu_item_id values from the catalogue provided. Never invent an item or price.
 - Use only dishes currently published and available in this kitchen's menu. Preserve listed dish names and portions.
+- This assistant is available only for kitchens with a recorded verification review.
 - If an item or pairing is not listed, say so and suggest a listed alternative only if one is present.
 - Never invent ingredients, portions, extras, vendor verification, neighborhood coverage, or delivery fees.
 - Write the customer's intent as cart quantities. "make it three in total" means set that line to quantity 3; "add one more" means increase the existing quantity by one.
@@ -546,7 +598,7 @@ export async function discoveryAssistant(
 ): Promise<AssistantSuggestion> {
   const model = await modelDiscovery(message, zoneId);
   const constraints = model ?? localDiscoveryConstraints(message);
-  const result = planDiscovery(constraints, zoneId);
+  const result = planDiscovery(constraints, zoneId, message);
   result.source = model ? "model" : "local";
   return result;
 }

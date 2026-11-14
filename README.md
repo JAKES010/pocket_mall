@@ -10,6 +10,19 @@ work incoming orders through to settlement.
 
 **Everything is demo data.** No real payments, payouts or food deliveries occur.
 
+### Vendor verification
+
+Only vendors with a recorded verification review are included in OrderDesk AI
+recommendations or the live marketplace. Seeded sample vendors remain visible
+with a preview label and are never treated as verified. New vendor listings
+stay hidden until an operator reviews them.
+
+To record a review, set the server-only `ORDERDESK_VERIFICATION_TOKEN`, confirm
+the vendor's business and menu evidence independently, then send an authenticated
+`POST /api/admin/vendors/{vendorId}/verification` with a JSON `source_url` that
+points to the evidence. `DELETE` revokes the verification. The review endpoint
+stores the evidence URL and timestamp; it does not verify evidence automatically.
+
 ## Run it
 
 Requires **Node.js 22+** (the app uses the built-in `node:sqlite` module).
