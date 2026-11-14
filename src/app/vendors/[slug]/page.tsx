@@ -5,6 +5,7 @@ import { CartBar } from "@/components/cart-bar";
 import { MessageVendorButton } from "@/components/message-vendor-button";
 import { getPublicVendorBySlug } from "@/lib/catalogue/service";
 import { formatNaira } from "@/lib/money";
+import { foodImage } from "@/lib/food-imagery";
 
 export default async function VendorPage({
   params,
@@ -14,6 +15,7 @@ export default async function VendorPage({
   const { slug } = await params;
   const vendor = getPublicVendorBySlug(slug);
   if (!vendor) notFound();
+  const vendorVisual = foodImage(vendor.image_url, `${vendor.name} ${vendor.description}`);
 
   const accepting = vendor.accepting_orders === 1;
   const available = vendor.menu.filter((item) => item.available && !item.archived);
@@ -29,9 +31,12 @@ export default async function VendorPage({
 
       <section className="vendor-profile overflow-hidden rounded-[1.75rem] border border-line bg-paper">
         <div className="vendor-cover relative">
-          {vendor.image_url ? (
+          {vendorVisual.src ? (
             // eslint-disable-next-line @next/next/no-img-element
-            <img src={vendor.image_url} alt={`${vendor.name} kitchen`} className="size-full object-cover" />
+            <>
+              <img src={vendorVisual.src} alt={vendorVisual.illustrative ? `Illustrative kitchen preview for ${vendor.name}` : `${vendor.name} kitchen`} className="size-full object-cover" />
+              {vendorVisual.illustrative && <span className="food-image-caption">Illustrative photo</span>}
+            </>
           ) : (
             <div className="grid size-full place-items-center text-7xl" aria-hidden="true">{vendor.emoji}</div>
           )}
@@ -93,11 +98,12 @@ export default async function VendorPage({
             {available.map((item, index) => (
               <article key={item.id} className="menu-card group" style={{ animationDelay: `${index * 65}ms` }}>
                 <div className="menu-card-image">
-                  {item.image_url ? (
+                  {foodImage(item.image_url, `${item.name} ${item.description}`).src ? (
                     // eslint-disable-next-line @next/next/no-img-element
-                    <img src={item.image_url} alt={item.name} className="size-full object-cover transition duration-700 group-hover:scale-105" />
+                    <img src={foodImage(item.image_url, `${item.name} ${item.description}`).src!} alt={foodImage(item.image_url, `${item.name} ${item.description}`).illustrative ? `Illustrative photo for ${item.name}` : item.name} className="size-full object-cover transition duration-700 group-hover:scale-105" />
                   ) : <div className="grid size-full place-items-center text-5xl" aria-hidden="true">{vendor.emoji}</div>}
                   <span className="menu-image-sheen" />
+                  {foodImage(item.image_url, `${item.name} ${item.description}`).illustrative && <span className="food-image-caption">Illustrative photo</span>}
                 </div>
                 <div className="flex flex-1 flex-col p-4 sm:p-5">
                   <div className="flex items-start justify-between gap-3"><h3 className="menu-title text-lg font-semibold leading-snug">{item.name}</h3><span className="menu-price">{formatNaira(item.price_kobo)}</span></div>

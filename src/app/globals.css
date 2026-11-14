@@ -186,6 +186,8 @@
   .menu-card { overflow:hidden; border:1px solid #e8ddd0; border-radius:20px; background:#fffdf9; box-shadow:0 2px 5px #241b1607,0 12px 28px -24px #241b1638; transition:transform .35s cubic-bezier(.2,.8,.2,1),box-shadow .35s,border-color .3s; animation:card-arrive .5s both; }
   .menu-card:hover { transform:translateY(-4px); border-color:#d6b294; box-shadow:0 18px 40px -25px #241b1640; }
   .menu-card-image { position:relative; aspect-ratio:16/10; overflow:hidden; background:linear-gradient(135deg,#f4e7d6,#e8d0b8); }
+  .food-image-caption { position:absolute; z-index:2; right:9px; bottom:9px; padding:5px 8px; border:1px solid #ffffff80; border-radius:999px; background:#17130fc9; color:#fffaf0; font-size:9px; font-weight:700; letter-spacing:.025em; line-height:1; backdrop-filter:blur(8px); }
+  .hero-image-caption { top:8px; right:8px; bottom:auto; }
   .menu-image-sheen { position:absolute; inset:50% 0 0; background:linear-gradient(transparent,#27190d20); pointer-events:none; }
   .menu-title { font-family:var(--font-display); }
   .menu-price { flex:none; color:#a63610; font-size:14px; font-weight:800; }

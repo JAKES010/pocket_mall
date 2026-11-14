@@ -43,16 +43,17 @@ export default async function MarketplacePage({
             <div className="food-orbit food-orbit-one" /><div className="food-orbit food-orbit-two" />
             <div className="food-note food-note-top"><span className="food-note-star">✳</span><span><b>A good day</b><small>starts with good food</small></span></div>
             <div className="food-card food-card-main">
-              {/* eslint-disable-next-line @next/next/no-img-element */}<img src="/food/rice.svg" alt="Rice and chicken" />
+              {/* eslint-disable-next-line @next/next/no-img-element */}<img src="/food/photos/jollof.jpg" alt="Illustrative jollof rice with fried plantain" />
               <div><span>THE COMFORT PICK</span><b>Rice &amp; chicken</b></div>
             </div>
             <div className="food-card food-card-small food-card-left">
-              {/* eslint-disable-next-line @next/next/no-img-element */}<img src="/food/suya.svg" alt="Fresh suya" /><div><span>FIRE &amp; FLAVOUR</span><b>Evening suya</b></div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}<img src="/food/photos/grill.jpg" alt="Illustrative Nigerian street grilling" /><div><span>FIRE &amp; FLAVOUR</span><b>Evening suya</b></div>
             </div>
             <div className="food-card food-card-small food-card-right">
-              {/* eslint-disable-next-line @next/next/no-img-element */}<img src="/food/burger.svg" alt="Burger and chips" /><div><span>THE CROWD FAVOURITE</span><b>Campus burger</b></div>
+              {/* eslint-disable-next-line @next/next/no-img-element */}<img src="/food/photos/burger.jpg" alt="Illustrative burger and chips" /><div><span>THE CROWD FAVOURITE</span><b>Campus burger</b></div>
             </div>
             <div className="food-stamp"><span>GOOD FOOD</span><b>✳</b><span>GOOD MOOD</span></div>
+            <span className="food-image-caption hero-image-caption">Illustrative food photography</span>
           </div>
         </div>
         <div className="hero-bottomline"><span>LOCAL FLAVOUR, A LITTLE CLOSER</span><span>01 — MADE IN OTUKPO</span></div>

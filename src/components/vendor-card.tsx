@@ -1,9 +1,11 @@
 import Link from "next/link";
 import type { VendorCard as VendorCardType } from "@/lib/catalogue/service";
 import { formatNaira } from "@/lib/money";
+import { foodImage } from "@/lib/food-imagery";
 
 export function VendorCard({ vendor, index = 0 }: { vendor: VendorCardType; index?: number }) {
   const accepting = vendor.accepting_orders === 1;
+  const visual = foodImage(vendor.image_url, `${vendor.name} ${vendor.category} ${vendor.description}`);
   return (
     <Link
       href={`/vendors/${vendor.slug}`}
@@ -11,10 +13,10 @@ export function VendorCard({ vendor, index = 0 }: { vendor: VendorCardType; inde
       style={{ animationDelay: `${index * 75}ms` }}
     >
       <div className="vendor-card-image relative aspect-[16/9] overflow-hidden bg-brand-50">
-        {vendor.image_url ? (
+        {visual.src ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={vendor.image_url}
+            src={visual.src}
             alt=""
             className="size-full object-cover transition duration-700 group-hover:scale-[1.06]"
           />
@@ -43,6 +45,9 @@ export function VendorCard({ vendor, index = 0 }: { vendor: VendorCardType; inde
           )}
           {vendor.verified_at && (
             <span className="badge bg-[#e4f4ca] text-[#305a31]">Verified kitchen</span>
+          )}
+          {visual.illustrative && (
+            <span className="badge bg-white/90 text-stone-600">Illustrative photo</span>
           )}
         </div>
       </div>

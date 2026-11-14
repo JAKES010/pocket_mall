@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { useCart } from "@/components/cart-provider";
 import { formatNaira } from "@/lib/money";
+import { foodImage } from "@/lib/food-imagery";
 import type { AssistantDiscoveryOption, AssistantSuggestion } from "@/lib/types";
 
 const QUICK_PROMPTS = [
@@ -181,13 +182,17 @@ export function AssistantWidget() {
                       .join("-")}`}
                     className="assistant-option rounded-2xl border border-line bg-white p-4"
                   >
-                    <div className="assistant-option-image" aria-hidden="true">
-                      {option.items[0]?.image_url ? (
+                    <div className="assistant-option-image">
+                      {foodImage(option.items[0]?.image_url, option.items[0]?.name ?? "").src ? (
                         // eslint-disable-next-line @next/next/no-img-element
-                        <img src={option.items[0].image_url} alt="" />
+                        <img
+                          src={foodImage(option.items[0]?.image_url, option.items[0]?.name ?? "").src!}
+                          alt={foodImage(option.items[0]?.image_url, option.items[0]?.name ?? "").illustrative ? `Illustrative photo for ${option.items[0]?.name}` : ""}
+                        />
                       ) : (
                         <span>✳</span>
                       )}
+                      {foodImage(option.items[0]?.image_url, option.items[0]?.name ?? "").illustrative && <span className="food-image-caption">Illustrative photo</span>}
                     </div>
                     <div className="flex items-start justify-between gap-2">
                       <div>
@@ -217,9 +222,9 @@ export function AssistantWidget() {
                           className="flex items-baseline justify-between gap-3"
                         >
                           <span className="inline-flex items-center gap-2">
-                            {item.image_url && (
+                            {foodImage(item.image_url, item.name).src && (
                               // eslint-disable-next-line @next/next/no-img-element
-                              <img src={item.image_url} alt="" className="assistant-food-thumb" />
+                              <img src={foodImage(item.image_url, item.name).src!} alt={foodImage(item.image_url, item.name).illustrative ? `Illustrative photo for ${item.name}` : ""} className="assistant-food-thumb" />
                             )}
                             <span className="font-semibold">{item.quantity}×</span>{" "}
                             {item.name}

@@ -5,6 +5,7 @@ import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { useCart } from "@/components/cart-provider";
 import { formatNaira, formatTime } from "@/lib/money";
+import { foodImage } from "@/lib/food-imagery";
 import type { AssistantSuggestion, Message } from "@/lib/types";
 
 interface PanelProps {
@@ -255,9 +256,9 @@ export function ChatPanel({
                   {suggestion.items.map((item) => (
                     <li key={item.menu_item_id} className="chat-suggestion-line flex items-center justify-between gap-2">
                       <span className="inline-flex items-center gap-2">
-                        {item.image_url && (
+                        {foodImage(item.image_url, item.name ?? "").src && (
                           // eslint-disable-next-line @next/next/no-img-element
-                          <img src={item.image_url} alt="" className="chat-food-thumb" />
+                          <img src={foodImage(item.image_url, item.name ?? "").src!} alt={foodImage(item.image_url, item.name ?? "").illustrative ? `Illustrative photo for ${item.name}` : ""} className="chat-food-thumb" />
                         )}
                         {item.quantity}× {item.name}
                       </span>
