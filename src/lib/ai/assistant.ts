@@ -67,11 +67,12 @@ const STOPWORDS = new Set([
   "a", "an", "and", "are", "as", "at", "be", "below", "budget", "but", "by",
   "can", "couple", "deliver", "delivery", "do", "for", "from", "get", "give",
   "i", "in", "including", "is", "it", "less", "like", "max", "maximum", "me",
-  "more", "my", "naira", "need", "of", "on", "or", "order", "people", "person",
+  "more", "my", "naira", "need", "of", "on", "or", "order", "people", "person", "one",
   "pick", "pickup", "please", "some", "something", "than", "that", "the",
   "then", "these", "this", "three", "to", "two", "under", "us", "want", "we",
   "what", "with", "would", "you", "food", "eat", "nice", "good", "cheap",
-  "plenty", "total", "in", "k",
+  "plenty", "total", "in", "k", "campus", "gate", "gra", "otukpo", "main",
+  "zone", "each", "item", "portion",
 ]);
 
 const NUMBER_WORDS: Record<string, number> = {
@@ -310,7 +311,7 @@ function buildCandidates(
     }
   }
 
-  const beveragePattern = /\b(drink|beverage|zobo|malt|coke|water|juice|shake|soda)\b/i;
+  const beveragePattern = /\b(drink|beverage|zobo|malt|coke|water|juice|shake|soda|chapman|soft drink)\b/i;
   const requestNamesBeverage = constraints.keywords.some((keyword) => beveragePattern.test(keyword));
   if (constraints.keywords.length > 0 && !requestNamesBeverage) {
     const main = scored.find(({ item }) => !beveragePattern.test(`${item.name} ${item.tags}`));
@@ -321,7 +322,7 @@ function buildCandidates(
       pushCart(
         [
           { menu_item_id: main.item.id, quantity: target },
-          { menu_item_id: beverage.id, quantity: 1 },
+          { menu_item_id: beverage.id, quantity: target },
         ],
         main.score + 0.25,
         `Menu pairing: ${beverage.name}`,
