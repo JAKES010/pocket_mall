@@ -163,8 +163,8 @@ export function ChatPanel({
     : 0;
 
   return (
-    <div className="card flex h-[calc(100dvh-15rem)] min-h-[28rem] flex-col overflow-hidden md:h-[calc(100dvh-13rem)]">
-      <div className="flex items-center justify-between gap-3 border-b border-line bg-paper px-4 py-3">
+    <div className="chat-panel card flex h-[calc(100dvh-15rem)] min-h-[28rem] flex-col overflow-hidden md:h-[calc(100dvh-13rem)]">
+      <div className="chat-header flex items-center justify-between gap-3 border-b border-line bg-paper px-4 py-3">
         <div className="flex items-center gap-3">
           <span className="grid size-10 place-items-center rounded-xl bg-brand-100 text-xl">
             {vendor.emoji}
@@ -186,7 +186,7 @@ export function ChatPanel({
         <span className="badge bg-leaf-50 text-leaf-700">Live · polling</span>
       </div>
 
-      <div className="flex-1 space-y-3 overflow-y-auto bg-cream/40 px-4 py-4">
+      <div className="chat-stream flex-1 space-y-3 overflow-y-auto bg-cream/40 px-4 py-4">
         {messages.length === 0 && (
           <div className="mx-auto max-w-sm rounded-2xl border border-dashed border-line bg-paper px-4 py-6 text-center text-sm text-muted">
             No messages yet. Say hello or ask the assistant to build your order.
@@ -200,10 +200,10 @@ export function ChatPanel({
           return (
             <div
               key={message.id}
-              className={`flex ${own ? "justify-end" : "justify-start"}`}
+              className={`chat-message flex ${own ? "is-own justify-end" : "justify-start"} ${assistant ? "is-assistant" : ""}`}
             >
               <div
-                className={`max-w-[85%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed ${
+                className={`chat-bubble max-w-[85%] rounded-2xl px-3.5 py-2.5 text-sm leading-relaxed ${
                   assistant
                     ? "border border-brand-200 bg-brand-50 text-ink"
                     : own
@@ -235,7 +235,7 @@ export function ChatPanel({
         })}
 
         {suggestion && (
-          <div className="rounded-2xl border border-brand-200 bg-paper p-3.5">
+          <div className="chat-suggestion rounded-2xl border border-brand-200 bg-paper p-3.5">
             <div className="flex items-center justify-between gap-2">
               <p className="text-[10px] font-bold uppercase tracking-wide text-brand-700">
                 Assistant draft · review before applying
@@ -298,7 +298,7 @@ export function ChatPanel({
       )}
 
       {viewerRole === "customer" && (
-        <div className="border-t border-line bg-paper px-4 pt-3">
+        <div className="chat-assistant-composer border-t border-line bg-paper px-4 pt-3">
           <form
             onSubmit={(event) => {
               event.preventDefault();

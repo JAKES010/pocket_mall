@@ -14,7 +14,7 @@ export default async function MessagesPage() {
   const conversations = listConversations(user.id);
 
   return (
-    <div>
+    <div className="messages-page">
       <PageHeading eyebrow="Inbox" title="Messages">
         Chat with vendors about your order, or reply to customers from your
         storefront. New messages appear automatically.
@@ -30,14 +30,14 @@ export default async function MessagesPage() {
           Open a storefront and tap “Message vendor” to start a conversation.
         </EmptyState>
       ) : (
-        <div className="card divide-y divide-line">
+        <div className="conversation-list">
           {conversations.map((conversation) => {
             const asVendor = conversation.customer_id !== user.id;
             return (
               <Link
                 key={conversation.id}
                 href={`/messages/${conversation.id}`}
-                className="flex items-center gap-4 px-4 py-4 transition hover:bg-brand-50/40 sm:px-5"
+                className="conversation-row flex items-center gap-4 px-4 py-4 sm:px-5"
               >
                 <span className="grid size-11 shrink-0 place-items-center rounded-2xl bg-brand-100 text-xl">
                   {conversation.vendor_emoji}

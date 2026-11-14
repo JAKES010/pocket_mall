@@ -29,7 +29,7 @@ export default async function ConversationPage({
   );
 
   return (
-    <div>
+    <div className="conversation-page">
       <div className="mb-4 flex flex-wrap items-center justify-between gap-2">
         <Link href="/messages" className="btn-ghost btn-sm -ml-2">
           ← All messages

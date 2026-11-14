@@ -78,8 +78,8 @@ export function AssistantWidget() {
   }
 
   return (
-    <section className="card overflow-hidden">
-      <div className="border-b border-line bg-gradient-to-br from-brand-50 via-paper to-paper p-5 sm:p-6">
+    <section className="assistant-widget card overflow-hidden">
+      <div className="assistant-header border-b border-line bg-gradient-to-br from-brand-50 via-paper to-paper p-5 sm:p-6">
         <div className="flex flex-wrap items-center gap-2">
           <span className="badge bg-brand-600 text-white">AI assistant</span>
           <span className="text-xs font-semibold text-muted">
@@ -178,7 +178,7 @@ export function AssistantWidget() {
                     key={`${option.vendor_id}-${option.items
                       .map((item) => `${item.menu_item_id}x${item.quantity}`)
                       .join("-")}`}
-                    className="rounded-2xl border border-line bg-white p-4"
+                    className="assistant-option rounded-2xl border border-line bg-white p-4"
                   >
                     <div className="flex items-start justify-between gap-2">
                       <div>
