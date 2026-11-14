@@ -13,163 +13,85 @@ export default async function MarketplacePage({
   const q = (params.q ?? "").trim();
   const acceptingOnly = params.accepting === "1";
   const vendors = listPublishedVendors({ q, acceptingOnly });
-  const acceptingCount = vendors.filter(
-    (vendor) => vendor.accepting_orders === 1,
-  ).length;
+  const acceptingCount = vendors.filter((vendor) => vendor.accepting_orders === 1).length;
 
   return (
-    <div className="space-y-8">
-      <section className="grid items-center gap-6 lg:grid-cols-[1.15fr_0.85fr]">
-        <div>
-          <div className="flex flex-wrap items-center gap-2">
-            <span className="badge bg-brand-100 text-brand-700">
-              Otukpo, Benue · Fast food
-            </span>
-            <span className="badge bg-paper text-muted ring-1 ring-line">
-              Demo wallet · test funds
-            </span>
+    <div className="marketplace space-y-14 sm:space-y-20">
+      <section className="hero-panel relative isolate overflow-hidden rounded-[2rem]">
+        <div className="hero-grain" aria-hidden="true" />
+        <div className="relative grid min-h-[520px] items-center gap-8 px-6 py-12 sm:px-10 lg:min-h-[590px] lg:grid-cols-[1.03fr_.97fr] lg:px-14 lg:py-16">
+          <div className="relative z-10 max-w-xl">
+            <div className="hero-kicker"><span className="hero-live-dot" /> OTUKPO, BENUE · MADE FOR YOUR NEIGHBOURHOOD</div>
+            <h1 className="hero-title mt-7 text-[3.45rem] font-semibold leading-[.99] tracking-[-.055em] sm:text-6xl lg:text-[4.5rem]">
+              Good food finds <span>its way</span> to you.
+            </h1>
+            <p className="mt-5 max-w-md text-base leading-7 text-white/70 sm:text-lg">
+              Find the kitchen you&apos;re craving. Choose your meal. We&apos;ll make ordering feel easy.
+            </p>
+            <div className="mt-8 flex flex-wrap gap-3">
+              <a href="#vendors" className="hero-cta">Explore local kitchens <span aria-hidden="true">↗</span></a>
+              <Link href="/sell/onboarding" className="hero-secondary">Open your storefront</Link>
+            </div>
+            <div className="hero-proof mt-10 flex flex-wrap items-center gap-x-7 gap-y-4">
+              <div><strong>{vendors.length.toString().padStart(2, "0")}</strong><span>local kitchens</span></div>
+              <div><strong>{acceptingCount.toString().padStart(2, "0")}</strong><span>taking orders now</span></div>
+              <div className="hero-proof-note"><span className="hero-proof-icon">✳</span><span>Independent kitchens.<br />One easy place to order.</span></div>
+            </div>
           </div>
-          <h1 className="mt-4 text-4xl font-semibold leading-[1.05] sm:text-5xl lg:text-6xl">
-            Good food,
-            <br />
-            <span className="text-brand-600">properly ordered.</span>
-          </h1>
-          <p className="mt-4 max-w-xl text-[15px] leading-relaxed text-muted">
-            Discover fast-food vendors around Otukpo, describe what you want,
-            review an accurate order, and pay from one demo wallet. Any vendor
-            can open a storefront.
-          </p>
-          <div className="mt-5 flex flex-wrap gap-3">
-            <a href="#vendors" className="btn-primary">
-              Browse {vendors.length} kitchens
-            </a>
-            <Link href="/sell/onboarding" className="btn-secondary">
-              Sell your food
-            </Link>
-          </div>
-          <dl className="mt-6 grid max-w-lg grid-cols-3 gap-3 text-xs">
-            <div className="rounded-xl border border-line bg-paper/70 px-3 py-2.5">
-              <dt className="text-muted">Open now</dt>
-              <dd className="mt-0.5 text-lg font-bold">{acceptingCount}</dd>
-            </div>
-            <div className="rounded-xl border border-line bg-paper/70 px-3 py-2.5">
-              <dt className="text-muted">Delivery zones</dt>
-              <dd className="mt-0.5 text-lg font-bold">Per vendor</dd>
-            </div>
-            <div className="rounded-xl border border-line bg-paper/70 px-3 py-2.5">
-              <dt className="text-muted">Payments</dt>
-              <dd className="mt-0.5 text-lg font-bold">Demo</dd>
-            </div>
-          </dl>
-        </div>
 
-        <div className="relative hidden min-h-72 lg:block" aria-hidden="true">
-          <div className="absolute right-4 top-0 w-56 rotate-3 rounded-3xl border border-line bg-paper p-2 shadow-lg">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/food/rice.svg" alt="" className="w-full rounded-2xl" />
-            <p className="px-2 pb-1 pt-2 text-sm font-semibold">Rice & chicken</p>
-          </div>
-          <div className="absolute left-0 top-24 w-52 -rotate-6 rounded-3xl border border-line bg-paper p-2 shadow-lg">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/food/burger.svg" alt="" className="w-full rounded-2xl" />
-            <p className="px-2 pb-1 pt-2 text-sm font-semibold">Campus burger</p>
-          </div>
-          <div className="absolute bottom-0 right-16 w-48 rotate-6 rounded-3xl border border-line bg-paper p-2 shadow-lg">
-            {/* eslint-disable-next-line @next/next/no-img-element */}
-            <img src="/food/suya.svg" alt="" className="w-full rounded-2xl" />
-            <p className="px-2 pb-1 pt-2 text-sm font-semibold">Evening suya</p>
+          <div className="food-stage relative mx-auto h-[330px] w-full max-w-[500px] sm:h-[400px] lg:h-[470px]" aria-label="A selection of dishes from local kitchens">
+            <div className="food-orbit food-orbit-one" /><div className="food-orbit food-orbit-two" />
+            <div className="food-note food-note-top"><span className="food-note-star">✳</span><span><b>A good day</b><small>starts with good food</small></span></div>
+            <div className="food-card food-card-main">
+              {/* eslint-disable-next-line @next/next/no-img-element */}<img src="/food/rice.svg" alt="Rice and chicken" />
+              <div><span>THE COMFORT PICK</span><b>Rice &amp; chicken</b></div>
+            </div>
+            <div className="food-card food-card-small food-card-left">
+              {/* eslint-disable-next-line @next/next/no-img-element */}<img src="/food/suya.svg" alt="Fresh suya" /><div><span>FIRE &amp; FLAVOUR</span><b>Evening suya</b></div>
+            </div>
+            <div className="food-card food-card-small food-card-right">
+              {/* eslint-disable-next-line @next/next/no-img-element */}<img src="/food/burger.svg" alt="Burger and chips" /><div><span>THE CROWD FAVOURITE</span><b>Campus burger</b></div>
+            </div>
+            <div className="food-stamp"><span>GOOD FOOD</span><b>✳</b><span>GOOD MOOD</span></div>
           </div>
         </div>
+        <div className="hero-bottomline"><span>LOCAL FLAVOUR, A LITTLE CLOSER</span><span>01 — MADE IN OTUKPO</span></div>
+      </section>
+
+      <section id="vendors" className="scroll-mt-28">
+        <div className="mb-7 flex flex-col gap-5 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <p className="eyebrow">THE NEIGHBOURHOOD TABLE</p>
+            <h2 className="section-title mt-2 text-3xl sm:text-4xl">{q ? `Results for “${q}”` : "Find your next favourite."}</h2>
+            <p className="mt-2 text-sm text-muted">Good people, cooking good things, right here in Otukpo.</p>
+          </div>
+          <form method="get" className="vendor-search flex w-full flex-col gap-2 sm:flex-row lg:w-auto">
+            <label htmlFor="vendor-search" className="sr-only">Search vendors or menu items</label>
+            <div className="search-field-wrap"><span aria-hidden="true">⌕</span><input id="vendor-search" name="q" defaultValue={q} placeholder="A dish, a kitchen, a craving…" className="field sm:w-72" /></div>
+            <label className="flex cursor-pointer items-center gap-2 px-1 text-xs font-semibold text-muted"><input type="checkbox" name="accepting" value="1" defaultChecked={acceptingOnly} className="size-4 accent-brand-600" />Open now</label>
+            <button type="submit" className="btn-primary">Find food</button>
+          </form>
+        </div>
+        {vendors.length === 0 ? (
+          <EmptyState emoji="🔎" title="No kitchens match that search" href="/" action="Clear search">
+            {q ? `Nothing matched “${q}”. Try a dish name like rice, suya or burger.` : "No storefronts are published yet. A vendor can create one in minutes."}
+          </EmptyState>
+        ) : (
+          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">{vendors.map((vendor, index) => <VendorCard key={vendor.id} vendor={vendor} index={index} />)}</div>
+        )}
       </section>
 
       <AssistantWidget />
 
-      <section id="vendors" className="scroll-mt-24">
-        <div className="mb-4 flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-          <div>
-            <p className="text-[11px] font-bold uppercase tracking-[0.16em] text-brand-600">
-              Marketplace
-            </p>
-            <h2 className="section-title">
-              {q ? `Results for “${q}”` : "Otukpo kitchens"}
-            </h2>
-          </div>
-          <form
-            method="get"
-            className="flex w-full flex-col gap-2 sm:w-auto sm:flex-row sm:items-center"
-          >
-            <label htmlFor="vendor-search" className="sr-only">
-              Search vendors or menu items
-            </label>
-            <input
-              id="vendor-search"
-              name="q"
-              defaultValue={q}
-              placeholder="Search vendors or dishes"
-              className="field sm:w-64"
-            />
-            <label className="flex cursor-pointer items-center gap-2 text-xs font-semibold text-muted">
-              <input
-                type="checkbox"
-                name="accepting"
-                value="1"
-                defaultChecked={acceptingOnly}
-                className="size-4 accent-brand-600"
-              />
-              Accepting orders
-            </label>
-            <button type="submit" className="btn-secondary btn-sm">
-              Search
-            </button>
-          </form>
+      <section className="how-section">
+        <div className="mb-7"><p className="eyebrow">A LITTLE LESS HASSLE</p><h2 className="section-title mt-2 text-3xl sm:text-4xl">From craving to confirmed.</h2></div>
+        <div className="grid gap-px overflow-hidden rounded-3xl border border-line bg-line sm:grid-cols-3">
+          {[
+            { step: "01", title: "Find something good", body: "Browse Otukpo kitchens or tell the food assistant what sounds good." },
+            { step: "02", title: "Know what it costs", body: "See your items and delivery charge together before you confirm." },
+            { step: "03", title: "Follow your order", body: "Keep up with order updates and message the kitchen when you need to." },
+          ].map((item) => <div key={item.step} className="how-card"><span>{item.step}</span><h3>{item.title}</h3><p>{item.body}</p></div>)}
         </div>
-
-        {vendors.length === 0 ? (
-          <EmptyState
-            emoji="🔍"
-            title="No kitchens match that search"
-            href="/"
-            action="Clear search"
-          >
-            {q
-              ? `Nothing matched “${q}”. Try a dish name like rice, suya or burger.`
-              : "No storefronts are published yet. A vendor can create one in minutes."}
-          </EmptyState>
-        ) : (
-          <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {vendors.map((vendor) => (
-              <VendorCard key={vendor.id} vendor={vendor} />
-            ))}
-          </div>
-        )}
-      </section>
-
-      <section className="card grid gap-4 p-5 sm:grid-cols-3 sm:p-6">
-        {[
-          {
-            step: "01",
-            title: "Discover",
-            body: "Search vendors or describe your meal and budget to the assistant.",
-          },
-          {
-            step: "02",
-            title: "Review",
-            body: "The server prices every item and delivery fee before you confirm.",
-          },
-          {
-            step: "03",
-            title: "Pay & track",
-            body: "Pay from the demo wallet, then follow the vendor's status updates.",
-          },
-        ].map((item) => (
-          <div key={item.step}>
-            <span className="text-[11px] font-bold tracking-[0.16em] text-brand-600">
-              {item.step}
-            </span>
-            <h3 className="mt-1 text-lg font-semibold">{item.title}</h3>
-            <p className="mt-1 text-sm leading-relaxed text-muted">{item.body}</p>
-          </div>
-        ))}
       </section>
     </div>
   );

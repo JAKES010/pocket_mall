@@ -8,9 +8,9 @@ import { Logo } from "@/components/logo";
 export const dynamic = "force-dynamic";
 
 export const metadata: Metadata = {
-  title: "OrderDesk — Otukpo fast food, ordered properly",
+  title: "OrderDesk | Otukpo's local food marketplace",
   description:
-    "Discover fast-food vendors in Otukpo, describe what you want, review an accurate order, and pay with a demo wallet.",
+    "Discover local kitchens in Otukpo, explore their menus, and place an order with clear item and delivery pricing.",
 };
 
 export default function RootLayout({
@@ -21,33 +21,22 @@ export default function RootLayout({
       <body>
         <CartProvider>
           <SiteHeader />
-          <main className="mx-auto w-full max-w-6xl px-4 pb-28 pt-6 sm:px-6 md:pb-16">
+          <main className="mx-auto w-full max-w-7xl px-4 pb-28 pt-6 sm:px-6 md:pb-16 lg:px-8">
             {children}
           </main>
-          <footer className="border-t border-line/80 bg-paper/60">
-            <div className="mx-auto flex w-full max-w-6xl flex-col gap-4 px-4 py-8 sm:px-6 md:flex-row md:items-center md:justify-between">
+          <footer className="border-t border-line/80 bg-paper/70">
+            <div className="mx-auto flex w-full max-w-7xl flex-col gap-4 px-4 py-8 sm:px-6 md:flex-row md:items-center md:justify-between lg:px-8">
               <div className="flex items-start gap-3">
                 <Logo compact />
                 <div className="text-xs leading-relaxed text-muted">
-                  <p className="font-semibold text-ink">
-                    OrderDesk — an AI-assisted fast-food marketplace for Otukpo.
-                  </p>
-                  <p>
-                    Demo build. Vendors are fictional, and wallet funds are
-                    simulated test money — no real payments.
-                  </p>
+                  <p className="font-semibold text-ink">OrderDesk · Otukpo&apos;s local food marketplace.</p>
+                  <p>Preview experience. Listings and orders use sample data; wallet funds are simulated.</p>
                 </div>
               </div>
               <div className="flex flex-wrap gap-4 text-xs font-semibold text-muted">
-                <Link href="/" className="hover:text-ink">
-                  Explore
-                </Link>
-                <Link href="/sell/onboarding" className="hover:text-ink">
-                  Sell on OrderDesk
-                </Link>
-                <Link href="/wallet" className="hover:text-ink">
-                  Demo wallet
-                </Link>
+                <Link href="/" className="hover:text-ink">Explore</Link>
+                <Link href="/sell/onboarding" className="hover:text-ink">Sell on OrderDesk</Link>
+                <Link href="/wallet" className="hover:text-ink">Wallet</Link>
               </div>
             </div>
           </footer>
