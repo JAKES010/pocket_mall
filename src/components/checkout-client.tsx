@@ -303,9 +303,14 @@ export function CheckoutClient({ initialPhone }: { initialPhone: string }) {
         : 0;
 
   return (
-    <div className="grid gap-6 lg:grid-cols-[1.4fr_1fr]">
+    <div className="checkout-layout grid gap-6 lg:grid-cols-[1.4fr_1fr]">
+      <ol className="checkout-steps lg:col-span-2" aria-label="Checkout progress">
+        <li className="checkout-step is-done"><span>✓</span><div><b>Basket</b><small>Items selected</small></div></li>
+        <li className={`checkout-step ${quote ? "is-done" : "is-current"}`}><span>{quote ? "✓" : "02"}</span><div><b>Delivery details</b><small>Where and how</small></div></li>
+        <li className={`checkout-step ${quote ? "is-current" : ""}`}><span>03</span><div><b>Review &amp; pay</b><small>Confirm your order</small></div></li>
+      </ol>
       <div className="space-y-5">
-        <div className="card p-5 sm:p-6">
+        <div className="checkout-card checkout-cart-card card p-5 sm:p-6">
           <div className="flex items-center justify-between gap-3">
             <h2 className="text-lg font-semibold">
               Cart from {cart.vendor_name}
@@ -319,7 +324,7 @@ export function CheckoutClient({ initialPhone }: { initialPhone: string }) {
           </div>
           <ul className="mt-3 divide-y divide-line">
             {cart.items.map((item) => (
-              <li key={item.menu_item_id} className="flex items-center gap-3 py-3">
+              <li key={item.menu_item_id} className="checkout-line flex items-center gap-3 py-3">
                 <div className="min-w-0 flex-1">
                   <p className="truncate text-sm font-semibold">{item.name}</p>
                   <p className="text-xs text-muted">
@@ -364,7 +369,7 @@ export function CheckoutClient({ initialPhone }: { initialPhone: string }) {
         </div>
 
         {!quote ? (
-          <div className="card p-5 sm:p-6">
+          <div className="checkout-card checkout-details-card card p-5 sm:p-6">
             <h2 className="text-lg font-semibold">Delivery & contact</h2>
             <p className="mt-1 text-xs text-muted">
               These details, the menu prices and the delivery fee are locked into
@@ -495,7 +500,7 @@ export function CheckoutClient({ initialPhone }: { initialPhone: string }) {
             </div>
           </div>
         ) : (
-          <div className="card p-5 sm:p-6">
+          <div className="checkout-card checkout-details-card checkout-quote-card card p-5 sm:p-6">
             <div className="flex flex-wrap items-center justify-between gap-2">
               <h2 className="text-lg font-semibold">Quote locked</h2>
               <span className="badge bg-leaf-50 text-leaf-700">
@@ -554,7 +559,7 @@ export function CheckoutClient({ initialPhone }: { initialPhone: string }) {
       </div>
 
       <aside className="space-y-4 lg:sticky lg:top-24 lg:self-start">
-        <div className="card p-5">
+        <div className="checkout-summary card p-5">
           <h2 className="text-lg font-semibold">Order summary</h2>
           {quote ? (
             <ul className="mt-3 space-y-1.5 text-sm">
