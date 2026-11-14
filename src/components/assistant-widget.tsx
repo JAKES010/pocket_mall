@@ -69,6 +69,7 @@ export function AssistantWidget() {
           menu_item_id: item.menu_item_id,
           name: item.name,
           price_kobo: item.unit_price_kobo,
+          image_url: item.image_url,
           quantity: item.quantity,
         },
         vendor,
@@ -83,7 +84,7 @@ export function AssistantWidget() {
         <div className="flex flex-wrap items-center gap-2">
           <span className="badge bg-brand-600 text-white">AI assistant</span>
           <span className="text-xs font-semibold text-muted">
-            Finds real menu items within your budget
+            Uses currently available Otukpo menus and your budget
           </span>
         </div>
         <h2 className="mt-3 text-2xl font-semibold sm:text-[28px]">
@@ -91,7 +92,7 @@ export function AssistantWidget() {
         </h2>
         <p className="mt-1 text-sm leading-relaxed text-muted">
           Describe the food, the number of people and a budget. OrderDesk prices
-          every option with the vendor&apos;s real menu — the model never sets
+          every option with the vendor&apos;s published menu — the model never sets
           prices or takes payment.
         </p>
         <form
@@ -180,6 +181,14 @@ export function AssistantWidget() {
                       .join("-")}`}
                     className="assistant-option rounded-2xl border border-line bg-white p-4"
                   >
+                    <div className="assistant-option-image" aria-hidden="true">
+                      {option.items[0]?.image_url ? (
+                        // eslint-disable-next-line @next/next/no-img-element
+                        <img src={option.items[0].image_url} alt="" />
+                      ) : (
+                        <span>✳</span>
+                      )}
+                    </div>
                     <div className="flex items-start justify-between gap-2">
                       <div>
                         <Link
@@ -193,6 +202,7 @@ export function AssistantWidget() {
                             ? option.zone_name ?? "Delivery"
                             : "Pickup · no delivery fee"}
                         </p>
+                        {option.is_sample && <span className="mt-1 inline-flex badge bg-stone-100 text-stone-600">Preview kitchen</span>}
                       </div>
                       {option.note && (
                         <span className="badge bg-amber-100 text-amber-800">
@@ -206,7 +216,11 @@ export function AssistantWidget() {
                           key={item.menu_item_id}
                           className="flex items-baseline justify-between gap-3"
                         >
-                          <span>
+                          <span className="inline-flex items-center gap-2">
+                            {item.image_url && (
+                              // eslint-disable-next-line @next/next/no-img-element
+                              <img src={item.image_url} alt="" className="assistant-food-thumb" />
+                            )}
                             <span className="font-semibold">{item.quantity}×</span>{" "}
                             {item.name}
                           </span>

@@ -175,6 +175,7 @@ export interface AssistantCartItem {
   quantity: number;
   name?: string;
   unit_price_kobo?: number;
+  image_url?: string | null;
 }
 
 export interface AssistantSuggestion {
@@ -192,7 +193,8 @@ export interface AssistantDiscoveryOption {
   vendor_id: string;
   vendor_name: string;
   vendor_slug: string;
-  items: { menu_item_id: string; name: string; quantity: number; unit_price_kobo: number }[];
+  is_sample?: boolean;
+  items: { menu_item_id: string; name: string; quantity: number; unit_price_kobo: number; image_url?: string | null }[];
   subtotal_kobo: number;
   delivery_kobo: number;
   total_kobo: number;

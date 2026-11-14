@@ -146,6 +146,7 @@ export function ChatPanel({
           menu_item_id: item.menu_item_id,
           name: item.name ?? "Menu item",
           price_kobo: item.unit_price_kobo ?? 0,
+          image_url: item.image_url,
           quantity: item.quantity,
         },
         { id: vendor.id, name: vendor.name, slug: vendor.slug },
@@ -252,8 +253,12 @@ export function ChatPanel({
               <>
                 <ul className="mt-2 space-y-1 text-sm">
                   {suggestion.items.map((item) => (
-                    <li key={item.menu_item_id} className="flex justify-between gap-2">
-                      <span>
+                    <li key={item.menu_item_id} className="chat-suggestion-line flex items-center justify-between gap-2">
+                      <span className="inline-flex items-center gap-2">
+                        {item.image_url && (
+                          // eslint-disable-next-line @next/next/no-img-element
+                          <img src={item.image_url} alt="" className="chat-food-thumb" />
+                        )}
                         {item.quantity}× {item.name}
                       </span>
                       <span className="text-xs text-muted">
