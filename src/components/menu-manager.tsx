@@ -62,7 +62,7 @@ function ItemRow({ item }: { item: MenuItem }) {
   }
 
   return (
-    <li className="px-4 py-4 sm:px-5">
+    <li className="menu-manager-row px-4 py-4 sm:px-5">
       <div className="flex flex-wrap items-start justify-between gap-3">
         <div className="min-w-0">
           <div className="flex flex-wrap items-center gap-2">
@@ -265,8 +265,8 @@ export function MenuManager({
   }
 
   return (
-    <div className="grid gap-5 lg:grid-cols-[1fr_1.5fr]">
-      <section className="card h-fit p-5 lg:sticky lg:top-24">
+    <div className="vendor-tools-layout grid gap-5 lg:grid-cols-[.82fr_1.5fr]">
+      <section className="tool-panel h-fit p-5 lg:sticky lg:top-24">
         <h2 className="text-lg font-semibold">Add a dish</h2>
         <p className="mt-1 text-xs text-muted">
           Online immediately, unless you mark it out of stock.
@@ -354,7 +354,7 @@ export function MenuManager({
       </section>
 
       <section className="space-y-4">
-        <div className="card overflow-hidden">
+        <div className="tool-list-panel overflow-hidden">
           <div className="flex items-center justify-between border-b border-line px-4 py-3 sm:px-5">
             <h2 className="text-lg font-semibold">Current menu</h2>
             <span className="badge bg-paper text-muted ring-1 ring-line">
@@ -375,7 +375,7 @@ export function MenuManager({
         </div>
 
         {archived.length > 0 && (
-          <div className="card overflow-hidden">
+          <div className="tool-list-panel overflow-hidden">
             <div className="border-b border-line px-4 py-3 sm:px-5">
               <h2 className="text-sm font-bold uppercase tracking-wide text-muted">
                 Archived

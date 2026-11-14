@@ -17,7 +17,7 @@ export default async function VendorMenuPage() {
   const items = getMenuItems(vendor.id, true);
 
   return (
-    <div>
+    <div className="vendor-subpage">
       <Link href="/sell" className="btn-ghost btn-sm -ml-2 mb-2">
         ← Vendor desk
       </Link>

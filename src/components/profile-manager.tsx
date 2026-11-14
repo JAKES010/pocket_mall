@@ -218,8 +218,8 @@ export function ProfileManager({
   }
 
   return (
-    <div className="space-y-5">
-      <section className="card p-5 sm:p-6">
+    <div className="profile-manager space-y-5">
+      <section className="visibility-panel p-5 sm:p-6">
         <div className="flex flex-wrap items-center justify-between gap-3">
           <div>
             <h2 className="text-lg font-semibold">Visibility</h2>
@@ -260,7 +260,7 @@ export function ProfileManager({
         )}
       </section>
 
-      <section className="card p-5 sm:p-6">
+      <section className="tool-panel p-5 sm:p-6">
         <h2 className="text-lg font-semibold">Storefront details</h2>
         <form onSubmit={saveDetails} className="mt-3 grid gap-4 sm:grid-cols-2">
           <div>
@@ -371,7 +371,7 @@ export function ProfileManager({
         </form>
       </section>
 
-      <section className="card overflow-hidden">
+      <section className="tool-list-panel overflow-hidden">
         <div className="border-b border-line px-4 py-4 sm:px-5">
           <h2 className="text-lg font-semibold">Delivery zones</h2>
           <p className="text-xs text-muted">
