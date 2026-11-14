@@ -155,7 +155,7 @@ export function OnboardingClient() {
 
   if (createdVendorId) {
     return (
-      <div className="card p-6 sm:p-8">
+      <div className="onboarding-success card p-6 sm:p-8">
         <p className="text-3xl">🏪</p>
         <h2 className="mt-2 text-2xl font-semibold">Storefront created</h2>
         <p className="mt-1 text-sm text-muted">
@@ -177,8 +177,8 @@ export function OnboardingClient() {
   }
 
   return (
-    <form onSubmit={submit} className="space-y-5">
-      <section className="card p-5 sm:p-6">
+    <form onSubmit={submit} className="onboarding-form space-y-5">
+      <section className="onboarding-step card p-5 sm:p-6">
         <div className="flex items-center gap-2">
           <span className="badge bg-brand-600 text-white">Step 1</span>
           <h2 className="text-lg font-semibold">Storefront basics</h2>
@@ -307,7 +307,7 @@ export function OnboardingClient() {
         </div>
       </section>
 
-      <section className="card p-5 sm:p-6">
+      <section className="onboarding-step card p-5 sm:p-6">
         <div className="flex items-center gap-2">
           <span className="badge bg-brand-600 text-white">Step 2</span>
           <h2 className="text-lg font-semibold">Delivery zones</h2>
@@ -362,7 +362,7 @@ export function OnboardingClient() {
         )}
       </section>
 
-      <section className="card p-5 sm:p-6">
+      <section className="onboarding-step card p-5 sm:p-6">
         <div className="flex items-center gap-2">
           <span className="badge bg-brand-600 text-white">Step 3</span>
           <h2 className="text-lg font-semibold">Your first dish</h2>
@@ -441,7 +441,7 @@ export function OnboardingClient() {
         </div>
       )}
 
-      <div className="flex flex-wrap items-center gap-3">
+      <div className="onboarding-submit flex flex-wrap items-center gap-3">
         <button type="submit" disabled={busy} className="btn-primary">
           {busy ? (phase ?? "Creating…") : "Create & publish storefront"}
         </button>

@@ -357,6 +357,30 @@
   .assistant-header .chip { border-color:#e5d8c7; background:#fffdf9; }
   .assistant-option { box-shadow:0 5px 18px -16px #241b1680; transition:transform .25s,border-color .25s,box-shadow .25s; }
   .assistant-option:hover { transform:translateY(-2px); border-color:#d6b294; box-shadow:0 12px 25px -20px #241b1680; }
+  .site-header { box-shadow:0 5px 22px -19px #241b1680; }
+  .site-header>div:first-child { max-width:1440px; }
+  .site-header .group>span:first-child { border-radius:13px; box-shadow:0 7px 17px -11px #a63610aa; }
+  .site-header .group>span:last-child>span:first-child { font-family:var(--font-display); font-weight:700; }
+  .site-primary-nav a { position:relative; transition:color .2s,background .2s,transform .2s; }
+  .site-primary-nav a:hover { transform:translateY(-1px); }
+  .site-header .cart-button { border-color:#e4d7c7; background:#fffdf9; }
+  .site-header .cart-button:hover { border-color:#d6b294; box-shadow:0 5px 15px -12px #241b1677; }
+  .mobile-nav { padding-top:3px; box-shadow:0 -8px 25px -22px #241b1688; }
+  .mobile-nav-link { position:relative; min-height:48px; justify-content:center; transition:color .2s,transform .2s; }
+  .mobile-nav-link.is-active::before { position:absolute; top:-4px; left:50%; width:27px; height:3px; border-radius:99px; background:#cf4612; content:""; transform:translateX(-50%); }
+  .mobile-nav-link.is-active>span { transform:translateY(-1px); }
+  .onboarding-page>div:first-child { margin-bottom:24px; }
+  .onboarding-form { counter-reset:onboarding; }
+  .onboarding-step { position:relative; overflow:hidden; border-radius:21px; background:linear-gradient(145deg,#fffdf9,#fbf7ef); box-shadow:0 8px 27px -25px #241b1680; counter-increment:onboarding; }
+  .onboarding-step::after { position:absolute; top:21px; right:22px; color:#efe5d6; content:"0" counter(onboarding); font-family:var(--font-display); font-size:32px; font-weight:600; line-height:1; }
+  .onboarding-step h2 { font-family:var(--font-display); font-size:22px; }
+  .onboarding-step .badge { position:relative; z-index:1; background:#d5f080; color:#314a2c; }
+  .onboarding-step .field { min-height:44px; }
+  .onboarding-step textarea.field { min-height:78px; }
+  .onboarding-step button[aria-pressed="true"] { box-shadow:0 0 0 3px #cf461214; transform:translateY(-1px); }
+  .onboarding-submit { position:sticky; bottom:12px; z-index:5; border:1px solid #e8ddd0; border-radius:18px; padding:12px; background:#fffdf9ee; box-shadow:0 12px 35px -25px #241b1699; backdrop-filter:blur(16px); }
+  .onboarding-submit .btn-primary { min-height:45px; padding-inline:19px; box-shadow:0 8px 20px -13px #a63610cc; }
+  .onboarding-success { border-radius:23px; box-shadow:0 12px 40px -32px #241b1680; }
 }
 
 @keyframes card-arrive { from { opacity:0; translate:0 15px; } to { opacity:1; translate:0 0; } }
@@ -406,4 +430,5 @@
   .auth-panel,.auth-demo-panel { border-radius:21px; }
   .assistant-header h2 { font-size:25px; }
   .chat-panel { min-height:calc(100dvh - 14rem); }
+  .onboarding-submit { bottom:76px; }
 }

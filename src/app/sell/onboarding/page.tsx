@@ -12,7 +12,7 @@ export default async function VendorOnboardingPage() {
   if (getVendorForOwner(user.id)) redirect("/sell");
 
   return (
-    <div>
+    <div className="onboarding-page">
       <Link href="/" className="btn-ghost btn-sm -ml-2 mb-2">
         ← Back to marketplace
       </Link>

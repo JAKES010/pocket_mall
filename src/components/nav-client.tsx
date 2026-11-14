@@ -9,7 +9,7 @@ export function CartButton() {
   return (
     <Link
       href="/checkout"
-      className="relative inline-flex items-center gap-2 rounded-full border border-line bg-paper px-3 py-2 text-sm font-semibold text-ink transition hover:border-brand-300"
+      className="cart-button relative inline-flex items-center gap-2 rounded-full border border-line bg-paper px-3 py-2 text-sm font-semibold text-ink transition hover:border-brand-300"
       aria-label={`Cart, ${count} item${count === 1 ? "" : "s"}`}
     >
       <svg viewBox="0 0 24 24" className="size-5" fill="none" aria-hidden="true">
@@ -59,7 +59,7 @@ export function MobileNav({ hasVendor }: { hasVendor: boolean }) {
       : { href: "/sell/onboarding", label: "Sell", icon: "🏪" },
   ];
   return (
-    <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-line bg-paper/95 backdrop-blur md:hidden">
+      <nav className="mobile-nav fixed inset-x-0 bottom-0 z-40 border-t border-line bg-paper/95 backdrop-blur md:hidden">
       <ul className="mx-auto flex max-w-lg items-stretch justify-between px-2 pb-[max(6px,env(safe-area-inset-bottom))] pt-1.5">
         {items.map((item) => {
           const active =
@@ -70,8 +70,8 @@ export function MobileNav({ hasVendor }: { hasVendor: boolean }) {
             <li key={item.href} className="flex-1">
               <Link
                 href={item.href}
-                className={`flex flex-col items-center gap-0.5 rounded-xl px-2 py-1.5 text-[10px] font-bold ${
-                  active ? "text-brand-600" : "text-muted"
+                className={`mobile-nav-link flex flex-col items-center gap-0.5 rounded-xl px-2 py-1.5 text-[10px] font-bold ${
+                  active ? "is-active text-brand-600" : "text-muted"
                 }`}
               >
                 <span className="relative text-base leading-none">
